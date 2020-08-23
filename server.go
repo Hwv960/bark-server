@@ -75,13 +75,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 	if len(title) <= 0 && len(body) <= 0 {
 		//url中不包含 title body，则从Form里取
-		for key, value := range r.Form {
-			if strings.ToLower(key) == "title" {
-				title = value[0]
-			} else if strings.ToLower(key) == "body" {
-				body = value[0]
-			}
-		}
+		title = r.Header.Get("title")
+		body = r.Header.Get("body")
 
 	}
 
